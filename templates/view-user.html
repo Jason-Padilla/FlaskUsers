@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User {{user['id']}}</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <style>
+        body 
+        {
+            background-image: url("{{ url_for('static', filename='images/email-pattern.png') }}");
+        }
+        .container 
+        {
+            
+            padding-top:2em;
+            background-color: white;
+            
+        }
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 0px;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
+        }
+        /* Optional: show position indicator in red */
+        ::-webkit-scrollbar-thumb {
+            background: #FF0000;
+        }
+        .table 
+        {
+           margin-top:40px;
+           margin-bottom:40px;
+        
+        }
+        form 
+        {
+            padding:20px 50px;
+        }
+        label
+        {
+            font-size: 1.25rem;
+        }
+        h1 
+        {
+            margin-bottom: 0px;
+        }
+        #header
+        {
+            display: flex;
+            align-items:center;
+
+        }
+        #header h1, #header a 
+        {
+            display: inline-block;
+        }
+        hr 
+        {
+            margin-top:0px;
+        }
+        .row 
+        {
+            padding-top:40px;
+            padding-left:20px;
+            padding-right:20px;
+        }
+        p
+        {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Users Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+    <div class = "container vh-100">
+        <div id = "header">
+            
+                <h1 class = "p-2">User {{user['id']}}</h1>
+                <a  class = "ml-auto p-2" href="/users">Home</a>
+        </div>
+        <hr>
+        <div class = "row justify-content-center">
+            <div class = "col-3">
+                <div class="card" style="width: 12rem;">
+                    <img src="{{ url_for('static', filename='images/user-dark.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h4 class="card-text">{{user['first_name']+" "+user['last_name']}}</h4>
+                    </div>
+                </div>
+            </div>
+    
+            <div class = "col-7">
+                <br>
+                <p>Email: {{user['email']}}</p>
+                <p>Created On: {{user['created_at']}}</p>
+                <p>Last Updated On: {{user['updated_at']}}</p>
+                <br>
+                
+                <a class='btn btn-primary btn' href="{{'/users/%s/edit'%user['id']}}" role='button'>Edit</a>
+                <a class='btn btn-danger btn' href="{{'/users/%s/delete'%user['id']}}"role='button'>Delete</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
